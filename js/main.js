@@ -23,8 +23,8 @@ let bullets = '';
 for (let i=0 ; i< images.length; i++){
 
     slides += ` <div class="item ">
-                    <img src="${images[i]}">
-                </div>` ;      
+                    <img src="${images[i]}" alt="img ${[i]}"> 
+                </div>` ;      /*aggiunta seo con alt*/
                 
     
     bullets += `<div class="circle"></div> `
