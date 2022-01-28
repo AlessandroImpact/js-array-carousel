@@ -1,57 +1,95 @@
-/*DEVO DEFINIRE UN ARRAY PER LE FOTO */
-
-const images = [
+const items = [
     'img/01.jpg',
     'img/02.jpg',
     'img/03.jpg',
     'img/04.jpg',
-    'img/05.jpg',
+    'img/05.jpg'
 ];
 
-const name = [
-    'svezia',
-    'italia',
-    'danimarca',
-    'russia',
-    'cina',
-
+const title = [
+    'Svezia',
+    'Svizzera',
+    'Gran Bretagna',
+    'Germania',
+    'Paradise'
 ]
 
-let slides = '';
-let bullets = '';
+const text = [
+    'Svezia Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum corporis.',
+    'Svizzera Lorem ipsum',
+    'Gran Bretagna Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
+    'Germania Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
+    'Paradise Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,'
+]
 
-for (let i=0 ; i< images.length; i++){
+let immagini = "";
+let thumbnails = "";
 
-    slides += ` <div class="item ">
-                    <img src="${images[i]}" alt="img ${[i]}"> 
-                </div>` ;      /*aggiunta seo con alt*/
-                
-    
-    bullets += `<div class="circle"></div> `
+//Per ogni indice aggiungo il relativo contenuto
+for (let i=0; i<items.length; i++) {
+
+    immagini += `<div class="main-picture">
+                    <img src="${items[i]}">
+                    <div class="text">
+                        <h2>${title[i]}</h2>
+                        <p>${text[i]}</p>
+                    </div>
+                </div>`;
+
+    thumbnails += `<div class="pictures">
+                        <img src="${items[i]}">
+                        <div class="overlay"></div>
+                    </div>`;
 
 }
 
-/*creo le slide */
+//Inserisco i div creati in precendenza nel for
+let immagineCorrente = document.querySelector(".main-image");
+immagineCorrente.innerHTML = immagini;
 
-let itemsContainer = document.querySelector('.items-container');
+let diapositivaCorrente = document.querySelector(".thumbnails");
+diapositivaCorrente.innerHTML = thumbnails;
 
-itemsContainer.innerHTML = slides;
+//Indico una variabile di partenza
+let momento = 0;
 
-/*creo i bullets */
+//Inserisco nella variabile corrente la classe on
+let immagineAttiva = document.getElementsByClassName("main-picture");
+let overlay = document.getElementsByClassName("overlay");
 
-let circleContainer = document.querySelector('.circle-container');
+immagineAttiva[momento].classList.add("on");
+overlay[momento].classList.add("on");
 
-circleContainer.innerHTML = bullets;
+//Cambio momento in base al click 
+let arrowDown = document.getElementById("arrow-down");
 
-/*inizializzo variabile che riferisce alla prima slide attiva */
+arrowDown.addEventListener("click",
 
-let currentSlide = 0;
+function () {
 
-let items = document.getElementsByClassName('item'); /*questo è un array */
+    if (momento < items.length - 1) {
 
-items[currentSlide].classList.add('active');
+        immagineAttiva[momento].classList.remove('on');
+        overlay[momento].classList.remove('on');
 
-let circles = document.getElementsByClassName('circle');
+        momento++; //vado alla slide seguente
 
-circles[currentSlide].classList.add('active');
+        immagineAttiva[momento].classList.add('on');
+        overlay[momento].classList.add('on');
+
+    } else {
+
+        immagineAttiva[momento].classList.remove('on');
+        overlay[momento].classList.remove('on');
+
+        momento = 0; //vai alla prima slide
+
+        immagineAttiva[momento].classList.add('on');
+        overlay[momento].classList.add('on');
+    }
+
+}
+
+);
+
 
