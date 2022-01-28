@@ -93,3 +93,31 @@ function () {
 );
 
 
+let arrowUp = document.getElementById("arrow-up");
+
+arrowUp.addEventListener('click', 
+function() {
+
+    if (momento > 0) {
+
+        immagineAttiva[momento].classList.remove('on');
+        overlay[momento].classList.remove('on');
+
+        momento--; //vado alla slide precedente
+
+        immagineAttiva[momento].classList.add('on');
+        overlay[momento].classList.add('on');
+
+    } else {
+
+        immagineAttiva[momento].classList.remove('on');
+        overlay[momento].classList.remove('on');
+        
+        momento = immagineAttiva.length - 1;
+
+        immagineAttiva[momento].classList.add('on');
+        overlay[momento].classList.add('on');
+
+    }
+}
+);
